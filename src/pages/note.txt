@@ -1,0 +1,4 @@
+Add error boundaries for better error handling?
+Create additional protected routes/pages?
+Add user profile management features?
+Implement route transitions?
