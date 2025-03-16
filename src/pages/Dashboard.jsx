@@ -7,6 +7,13 @@ import { supabase } from '../services/supabaseClient';
 import LoadingSpinner from '../components/LoadingSpinner';
 import AddTransactionModal from '../components/AddTransactionModal';
 import { Link } from 'react-router-dom';
+import { 
+  LayoutDashboard, 
+  Plus,
+  TrendingUp,
+  TrendingDown,
+  DollarSign 
+} from 'lucide-react';
 
 export default function Dashboard() {
   const { user } = useUser();
@@ -225,16 +232,20 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <LayoutDashboard className="h-7 w-7 text-emerald-600" />
+          Dashboard
+        </h1>
         <button 
           className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 
                      transition-colors flex items-center gap-2"
           onClick={() => setIsModalOpen(true)}
         >
-          <span>+ Add Transaction</span>
+          <Plus className="h-5 w-5" />
+          <span>Add Transaction</span>
         </button>
       </div>
 

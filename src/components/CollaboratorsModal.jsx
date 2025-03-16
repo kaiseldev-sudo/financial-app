@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../services/supabaseClient';
 import { useUser } from '../contexts/UserContext';
 import { PulseLoader } from 'react-spinners';
+import { X } from 'lucide-react';
 
 export default function CollaboratorsModal({ isOpen, onClose }) {
   const { user } = useUser();
@@ -174,11 +175,20 @@ export default function CollaboratorsModal({ isOpen, onClose }) {
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
         >
           <motion.div
-            initial={{ scale: 0.95 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0.95 }}
-            className="bg-white rounded-xl shadow-lg p-6 w-full max-w-lg"
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.95, opacity: 0 }}
+            className="bg-white rounded-xl p-6 w-full max-w-md relative"
           >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 
+                       transition-colors p-1"
+              aria-label="Close modal"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
             <h2 className="text-xl font-bold text-gray-800 mb-4">Manage Collaborators</h2>
             
             {error && (
@@ -333,12 +343,7 @@ export default function CollaboratorsModal({ isOpen, onClose }) {
             </div>
 
             <div className="mt-6 flex justify-end">
-              <button
-                onClick={onClose}
-                className="px-4 py-2 text-gray-600 hover:text-gray-800"
-              >
-                Close
-              </button>
+              {/* Other buttons if needed */}
             </div>
           </motion.div>
         </motion.div>

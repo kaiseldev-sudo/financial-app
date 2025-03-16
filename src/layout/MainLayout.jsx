@@ -4,15 +4,12 @@ import Header from "../components/Header";
 
 export default function MainLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
+    <div className="min-h-screen bg-gray-50">
       <Header />
-
-      {/* Main Content */}
-      <main 
-        className="flex-1 container mx-auto p-6 mt-4"
-        role="main"
-      >
-        <Outlet />
+      <main className="pb-8 pt-4">
+        <div className="px-4 max-w-7xl mx-auto">
+          <Outlet />
+        </div>
       </main>
 
       {/* Footer */}

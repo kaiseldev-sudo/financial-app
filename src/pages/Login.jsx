@@ -35,25 +35,37 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      // First authenticate
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       });
 
-      if (error) throw error;
+      if (authError) throw authError;
 
-      if (data.user) {
-        if (rememberMe) {
-          localStorage.setItem('rememberedEmail', formData.email);
-        } else {
-          localStorage.removeItem('rememberedEmail');
-        }
-        navigate('/dashboard');
+      // Then check if user data exists in your users or profiles table
+      const { data: userData, error: userError } = await supabase
+        .from('users') // or 'profiles' depending on your table name
+        .select('*')
+        .eq('id', authData.user.id)
+        .single();
+
+      if (userError || !userData) {
+        // If no user data found, sign out and show error
+        await supabase.auth.signOut();
+        throw new Error('User profile not found. Please register first.');
       }
+
+      // If everything is ok, proceed with login
+      if (rememberMe) {
+        localStorage.setItem('rememberedEmail', formData.email);
+      } else {
+        localStorage.removeItem('rememberedEmail');
+      }
+      navigate('/dashboard');
     } catch (err) {
       console.error('Login error:', err);
       setError(err.message || 'Failed to sign in');
-    } finally {
       setLoading(false);
     }
   };

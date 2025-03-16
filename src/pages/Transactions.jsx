@@ -6,6 +6,7 @@ import TransactionsTable from '../components/TransactionsTable';
 import AddTransactionModal from '../components/AddTransactionModal';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { format, startOfMonth, endOfMonth, subMonths } from 'date-fns';
+import { ArrowUpDown, Plus, Search } from 'lucide-react';
 
 export default function Transactions() {
   const { user } = useUser();
@@ -99,13 +100,17 @@ export default function Transactions() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-800">Transactions</h1>
+        <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <ArrowUpDown className="h-7 w-7 text-emerald-600" />
+          Transactions
+        </h1>
         <button 
           onClick={() => setIsModalOpen(true)}
           className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 
                    transition-colors flex items-center gap-2"
         >
-          <span>+ Add Transaction</span>
+          <Plus className="h-5 w-5" />
+          <span>Add Transaction</span>
         </button>
       </div>
 

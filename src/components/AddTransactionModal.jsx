@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../services/supabaseClient';
 import { useUser } from '../contexts/UserContext';
 import { format } from 'date-fns';
+import { X } from 'lucide-react';
 
 const CATEGORIES = {
   expense: [
@@ -139,6 +140,15 @@ export default function AddTransactionModal({
             exit={{ scale: 0.95, opacity: 0 }}
             className="bg-white rounded-xl p-6 w-full max-w-md relative"
           >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 
+                       transition-colors p-1"
+              aria-label="Close modal"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
             {showSuccessModal && successDetails ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

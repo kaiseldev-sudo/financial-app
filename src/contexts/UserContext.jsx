@@ -41,11 +41,29 @@ export function UserProvider({ children }) {
     }
   };
 
+  const updateUserAvatar = async (avatarUrl) => {
+    try {
+      const { error } = await supabase.auth.updateUser({
+        data: { avatar_url: avatarUrl }
+      });
+      if (error) throw error;
+      // Update local user state
+      setUser(prev => ({
+        ...prev,
+        user_metadata: { ...prev.user_metadata, avatar_url: avatarUrl }
+      }));
+    } catch (error) {
+      console.error('Error updating avatar:', error);
+      throw error;
+    }
+  };
+
   const value = {
     user,
     session,
     loading,
-    signOut
+    signOut,
+    updateUserAvatar
   };
 
   if (loading) {

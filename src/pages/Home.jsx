@@ -69,7 +69,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl font-bold text-center text-emerald-800 mb-12">
-              Why Choose FinanceTracker?
+              Why Choose FinQuility?
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {features.map((feature, index) => (
